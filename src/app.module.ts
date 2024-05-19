@@ -1,12 +1,16 @@
 import { join } from 'path'; // en node , usually goin at start of file
 import { Module } from '@nestjs/common';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import { PokemonModule } from './pokemon/pokemon.module';
 
+// the module decorator is used to define a module
+// module always goint inside of import array
 @Module({
   imports: [
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
+    PokemonModule,
   ],
 })
 export class AppModule {}
