@@ -3,11 +3,16 @@ import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { Model } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
+import { InjectModel } from '@nestjs/mongoose';
 
 @Injectable()
 export class PokemonService {
   // the injection depedency always is in the constructor
-  constructor(private readonly pokemonModel: Model<Pokemon>) {}
+
+  constructor(
+    @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
+    private readonly pokemonModel: Model<Pokemon>,
+  ) {}
 
   create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
