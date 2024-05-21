@@ -26,7 +26,7 @@ export class PokemonService {
       const createdPokemon = await this.pokemonModel.create(createPokemonDto);
       return createdPokemon;
     } catch (error) {
-      if (error === 11000) {
+      if (error.code === 11000) {
         throw new BadRequestException(
           `Pokemon exists in db ${JSON.stringify(error.keyValue)}`,
         );
@@ -37,7 +37,7 @@ export class PokemonService {
       );
     }
   }
-  chore: Add error handling to create method in PokemonService
+
   findAll() {
     return `This action returns all pokemon`;
   }
