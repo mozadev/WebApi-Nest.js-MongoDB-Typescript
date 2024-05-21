@@ -14,11 +14,16 @@ export class PokemonService {
     private readonly pokemonModel: Model<Pokemon>,
   ) {}
 
-  create(createPokemonDto: CreatePokemonDto) {
+  // the insertion to database is asyncronous
+  async create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
 
-    const createdPokemon = new this.pokemonModel(createPokemonDto);
-    return createdPokemon;
+    try {
+      const createdPokemon = await this.pokemonModel.create(createPokemonDto);
+      return createdPokemon;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   findAll() {
