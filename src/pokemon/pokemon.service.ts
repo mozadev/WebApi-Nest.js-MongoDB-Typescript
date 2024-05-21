@@ -5,7 +5,7 @@ import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 @Injectable()
 export class PokemonService {
   create(createPokemonDto: CreatePokemonDto) {
-    createPokemonDto.name = createPokemonDto.name.toLocaleUpperCase();
+    createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
     return createPokemonDto;
   }
 
