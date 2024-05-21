@@ -16,7 +16,9 @@ export class PokemonService {
 
   create(createPokemonDto: CreatePokemonDto) {
     createPokemonDto.name = createPokemonDto.name.toLocaleLowerCase();
-    return createPokemonDto;
+
+    const createdPokemon = new this.pokemonModel(createPokemonDto);
+    return createdPokemon;
   }
 
   findAll() {
