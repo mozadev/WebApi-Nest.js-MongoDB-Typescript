@@ -59,7 +59,7 @@ export class PokemonService {
     }
 
     //name
-    // verify if term is a name
+    // verify if term is a name, .trim to eliminate spaces back and front
     if (!pokemon) {
       pokemon = await this.pokemonModel.findOne({
         name: term.toLowerCase().trim(),
