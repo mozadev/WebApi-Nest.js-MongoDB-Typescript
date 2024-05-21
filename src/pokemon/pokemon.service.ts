@@ -46,26 +46,26 @@ export class PokemonService {
   async findOne(term: string) {
     let pokemon: Pokemon;
 
-    // verify if term is a number
+    // verify if term is a number, if not number jump to next if
     if (!isNaN(+term)) {
       pokemon = await this.pokemonModel.findOne({ no: term });
     }
     // return `This action returns a #${term} pokemon`;
 
     //mongoID
-    //verify if term is a valid mongoID
-    if (isValidObjectId(term)) {
+    //verify if term is a valid mongoID, if not valid jump to next if
+    if (!pokemon && isValidObjectId(term)) {
       pokemon = await this.pokemonModel.findById(term);
     }
 
     //name
-    // verify if term is a name, .trim to eliminate spaces back and front
+    // verify if term is a name of pokemon   , .trim to eliminate spaces back and front
     if (!pokemon) {
       pokemon = await this.pokemonModel.findOne({
         name: term.toLowerCase().trim(),
       });
     }
-
+    // by ultimo if if pokemon is null, throw a exception
     if (!pokemon)
       throw new NotFoundException(
         `Pokemon with id, name or no "${term}" not found`,
