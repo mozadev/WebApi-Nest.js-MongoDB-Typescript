@@ -43,6 +43,7 @@ export class PokemonService {
   }
 
   findOne(id: string) {
+    let pokemon;
     return `This action returns a #${id} pokemon`;
   }
 
