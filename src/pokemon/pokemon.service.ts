@@ -53,7 +53,7 @@ export class PokemonService {
     // return `This action returns a #${term} pokemon`;
 
     //mongoID
-    //verify if term is a valid mongoID, if not valid jump to next if
+    //if product was already found in the previous step, jump to the next if, otherwise, verify if term is a valid mongoID, if it's not valid, jump to next if
     if (!pokemon && isValidObjectId(term)) {
       pokemon = await this.pokemonModel.findById(term);
     }
