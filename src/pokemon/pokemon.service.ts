@@ -74,8 +74,11 @@ export class PokemonService {
     return pokemon;
   }
 
-  update(id: number, updatePokemonDto: UpdatePokemonDto) {
-    return `This action updates a #${id} pokemon`;
+  async update(term: string, updatePokemonDto: UpdatePokemonDto) {
+    // reutilize the function (with full validation) findOne to find the product
+    const pokemon = await this.findOne(term);
+
+    return `This action updates a #${term} pokemon`;
   }
 
   remove(id: number) {
