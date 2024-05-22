@@ -83,7 +83,7 @@ export class PokemonService {
     }
     //this "pokemon" not only have id, name , also  is a model of mongoose because throug the findOne function we get the model of mongoose
     await pokemon.updateOne(updatePokemonDto, { new: true });
-    return pokemon;
+    return { ...pokemon.toJSON(), ...updatePokemonDto };
   }
 
   remove(id: number) {
