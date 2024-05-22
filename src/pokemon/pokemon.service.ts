@@ -73,12 +73,16 @@ export class PokemonService {
 
     return pokemon;
   }
-
+  // term : term of search, it could be a number, a name or a mongoID
   async update(term: string, updatePokemonDto: UpdatePokemonDto) {
     // reutilize the function (with full validation) findOne to find the product
     const pokemon = await this.findOne(term);
 
-    return `This action updates a #${term} pokemon`;
+    if (updatePokemonDto.name) {
+      updatePokemonDto.name = updatePokemonDto.name.toLowerCase();
+    }
+    //this "pokemon" not only have id, name , also  is a model of mongoose because throug the findOne function we get the model of mongoose
+    await pokemon.updateOne(updatePokemonDto, { new: true });
   }
 
   remove(id: number) {
