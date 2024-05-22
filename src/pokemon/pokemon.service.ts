@@ -39,6 +39,31 @@ export class PokemonService {
     }
   }
 
+  // term : term of search, it could be a number, a name or a mongoID
+  async update(term: string, updatePokemonDto: UpdatePokemonDto) {
+    // reutilize the function (with full validation) findOne to find the product
+    const pokemon = await this.findOne(term);
+
+    if (updatePokemonDto.name) {
+      updatePokemonDto.name = updatePokemonDto.name.toLowerCase();
+    }
+
+    try {
+      //this "pokemon" not only have id, name , also  is a model of mongoose because throug the findOne function we get the model of mongoose
+      await pokemon.updateOne(updatePokemonDto, { new: true });
+      return { ...pokemon.toJSON(), ...updatePokemonDto };
+    } catch (error) {
+      if (error.code === 11000) {
+        throw new BadRequestException(
+          `Product exists in db ${JSON.stringify(error.keyValue)}`,
+        );
+      }
+      console.log(error);
+      throw new InternalServerErrorException(
+        `Can't update Product -  Check server logs`,
+      );
+    }
+  }
   findAll() {
     return `This action returns all pokemon`;
   }
@@ -72,18 +97,6 @@ export class PokemonService {
       );
 
     return pokemon;
-  }
-  // term : term of search, it could be a number, a name or a mongoID
-  async update(term: string, updatePokemonDto: UpdatePokemonDto) {
-    // reutilize the function (with full validation) findOne to find the product
-    const pokemon = await this.findOne(term);
-
-    if (updatePokemonDto.name) {
-      updatePokemonDto.name = updatePokemonDto.name.toLowerCase();
-    }
-    //this "pokemon" not only have id, name , also  is a model of mongoose because throug the findOne function we get the model of mongoose
-    await pokemon.updateOne(updatePokemonDto, { new: true });
-    return { ...pokemon.toJSON(), ...updatePokemonDto };
   }
 
   remove(id: number) {
