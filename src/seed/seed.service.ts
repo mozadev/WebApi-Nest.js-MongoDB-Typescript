@@ -7,8 +7,10 @@ export class SeedService {
   // axios only can be used once in a project and your value dont change then the asingment inicial is the best way to use it
   private readonly axios: AxiosInstance;
 
-  executedSeed() {
-    axios.get('https://pokeapi.co/api/v2/pokemon?limit=650&offset=0');
-    return 'This action returns all seed';
+  async executedSeed() {
+    const { data } = await this.axios.get(
+      'https://pokeapi.co/api/v2/pokemon?limit=650&offset=0',
+    );
+    return 'Seed executed';
   }
 }
