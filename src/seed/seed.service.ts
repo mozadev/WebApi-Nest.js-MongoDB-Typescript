@@ -16,7 +16,7 @@ export class SeedService {
     const { data } = await this.axios.get<ProductResponse>(
       'https://pokeapi.co/api/v2/pokemon?limit=650&offset=0',
     );
-    return data;
+    return data.results[0].name;
     // console.log(fetch);
     // return 'Seed executed';
   }
