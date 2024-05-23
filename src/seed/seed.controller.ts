@@ -15,6 +15,6 @@ export class SeedController {
 
   @Get()
   executedSeed() {
-    return this.seedService.executedSeed();
+    return this.seedService.executeSeed();
   }
 }
