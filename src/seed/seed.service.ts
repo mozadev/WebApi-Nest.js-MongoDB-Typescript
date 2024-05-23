@@ -4,6 +4,7 @@ import axios, { AxiosInstance } from 'axios';
 @Injectable()
 export class SeedService {
   //this is dependency de axios en us project
+  // axios only can be used once in a project and your value dont change then the asingment inicial is the best way to use it
   private readonly axios: AxiosInstance;
 
   executedSeed() {
