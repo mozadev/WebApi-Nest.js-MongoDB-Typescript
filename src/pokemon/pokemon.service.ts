@@ -75,6 +75,7 @@ export class PokemonService {
       });
     }
     // by ultimo if if pokemon is null, throw a exception
+    // exception of user (this is controlled by the user)
     if (!pokemon)
       throw new NotFoundException(
         `Pokemon with id, name or no "${term}" not found`,
@@ -83,8 +84,9 @@ export class PokemonService {
     return pokemon;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  async remove(id: string) {
+    const pokemon = await this.findOne(id);
+    await pokemon.deleteOne();
   }
 
   private handleException(error: any) {
@@ -94,6 +96,7 @@ export class PokemonService {
       );
     }
     console.log(error);
+    // excetpion of server (this is not controlled by the user, this is a error of the server)
     throw new InternalServerErrorException(
       `Can't update Product -  Check server logs`,
     );
