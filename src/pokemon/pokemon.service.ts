@@ -90,8 +90,11 @@ export class PokemonService {
     // return { id };
     // const result = await this.pokemonModel.findByIdAndDelete(id);
     // const result = await this.pokemonModel.deleteMany({ });becarfully with this, this will delete all the products. it is like delete * from table
-    const result = await this.pokemonModel.deleteOne({ _id: id }); // it must be await because it is asyncronous . it wait to terminate the process to return the result
-    return result;
+    //return result;
+    const { deletedCount } = await this.pokemonModel.deleteOne({ _id: id }); // it must be await because it is asyncronous . it wait to terminate the process to return the result
+    if (deletedCount === 0)
+      throw new BadRequestException(`Product with id "${id}" not found`);
+    return;
   }
 
   private handleException(error: any) {
