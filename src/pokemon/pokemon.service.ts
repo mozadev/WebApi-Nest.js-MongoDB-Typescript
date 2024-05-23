@@ -53,15 +53,7 @@ export class PokemonService {
       await pokemon.updateOne(updatePokemonDto, { new: true });
       return { ...pokemon.toJSON(), ...updatePokemonDto };
     } catch (error) {
-      if (error.code === 11000) {
-        throw new BadRequestException(
-          `Product exists in db ${JSON.stringify(error.keyValue)}`,
-        );
-      }
-      console.log(error);
-      throw new InternalServerErrorException(
-        `Can't update Product -  Check server logs`,
-      );
+      this.handleException(error);
     }
   }
   findAll() {
@@ -101,5 +93,17 @@ export class PokemonService {
 
   remove(id: number) {
     return `This action removes a #${id} pokemon`;
+  }
+
+  private handleException(error: any) {
+    if (error.code === 11000) {
+      throw new BadRequestException(
+        `Product exists in db ${JSON.stringify(error.keyValue)}`,
+      );
+    }
+    console.log(error);
+    throw new InternalServerErrorException(
+      `Can't update Product -  Check server logs`,
+    );
   }
 }
