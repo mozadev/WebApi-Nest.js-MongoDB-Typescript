@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
+import { ProductResponse } from './interfaces/product-response.interface';
 
 @Injectable()
 export class SeedService {
@@ -12,7 +13,7 @@ export class SeedService {
   }
 
   async executeSeed() {
-    const { data } = await this.axios.get(
+    const { data } = await this.axios.get<ProductResponse>(
       'https://pokeapi.co/api/v2/pokemon?limit=650&offset=0',
     );
     return data;
