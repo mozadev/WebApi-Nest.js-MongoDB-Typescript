@@ -83,12 +83,14 @@ export class PokemonService {
 
     return pokemon;
   }
-
+  //async remove(_id: string) it you use _id, you must use _id in ...deleteOne({ _id })
   async remove(id: string) {
-    // const pokemon = await this.findOne(id);
+    // const pokemon = await this.findOne(id); // we can use this to validate if exist product bu it is makes double query to the database (findOne and findByIdAndDelete)
     // await pokemon.deleteOne();
     // return { id };
-    const result = await this.pokemonModel.findByIdAndDelete(id);
+    // const result = await this.pokemonModel.findByIdAndDelete(id);
+    // const result = await this.pokemonModel.deleteMany({ });becarfully with this, this will delete all the products. it is like delete * from table
+    const result = await this.pokemonModel.deleteOne({ _id: id }); // it must be await because it is asyncronous . it wait to terminate the process to return the result
     return result;
   }
 
