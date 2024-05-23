@@ -5,6 +5,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import { Mongoose } from 'mongoose';
 import { MongooseModule } from '@nestjs/mongoose';
 import { CommonModule } from './common/common.module';
+import { SeedModule } from './seed/seed.module';
 
 // the module decorator is used to define a module
 // module always goint inside of import array
@@ -19,6 +20,8 @@ import { CommonModule } from './common/common.module';
     PokemonModule,
 
     CommonModule,
+
+    SeedModule,
   ],
 })
 export class AppModule {}
