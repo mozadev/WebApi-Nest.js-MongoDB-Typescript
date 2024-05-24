@@ -14,9 +14,19 @@ export class SeedService {
 
   async executeSeed() {
     const { data } = await this.axios.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=650&offset=0',
+      'https://pokeapi.co/api/v2/pokemon?limit=1&offset=0',
     );
-    return data.results[0].name;
+
+    data.results.forEach(({ name, url }) => {
+      // console.log({ name, url });
+      // console.log(segments);
+      const segments = url.split('/');
+      const no = +segments[segments.length - 2];
+      console.log({ name, no });
+    });
+    // use foreach to iterate over the data.results array and obtend the name and url of each element. it be usefull to insert database
+
+    return data.results;
     // console.log(fetch);
     // return 'Seed executed';
   }
