@@ -11,27 +11,28 @@ export class SeedService {
   // axios only can be used once in a project and your value dont change then the asingment inicial is the best way to use it
   private readonly axios: AxiosInstance = axios;
 
-  constructor(
-    @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
-    private readonly x: Model<Pokemon>,
-  ) {}
-
   // constructor() {
   //   // this could be replaced by a provider that allows to use axios throughout th project
   //   this.axios = axios.create();
   // }
 
+  constructor(
+    @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
+    private readonly prodModel: Model<Pokemon>,
+  ) {}
+
   async executeSeed() {
     const { data } = await this.axios.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=1&offset=0',
+      'https://pokeapi.co/api/v2/pokemon?limit=5&offset=0',
     );
 
-    data.results.forEach(({ name, url }) => {
+    data.results.forEach(async ({ name, url }) => {
       // console.log({ name, url });
       // console.log(segments);
       const segments = url.split('/');
       const no = +segments[segments.length - 2];
       console.log({ name, no });
+      const product = await this.prodModel.create({ name, no });
     });
     // use foreach to iterate over the data.results array and obtend the name and url of each element. it be usefull to insert database
 
