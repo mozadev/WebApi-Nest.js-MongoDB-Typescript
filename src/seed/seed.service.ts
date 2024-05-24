@@ -6,11 +6,12 @@ import { ProductResponse } from './interfaces/product-response.interface';
 export class SeedService {
   //this is dependency de axios en us project
   // axios only can be used once in a project and your value dont change then the asingment inicial is the best way to use it
-  private readonly axios: AxiosInstance;
+  private readonly axios: AxiosInstance = axios;
 
-  constructor() {
-    this.axios = axios.create();
-  }
+  // constructor() {
+  //   // this could be replaced by a provider that allows to use axios throughout th project
+  //   this.axios = axios.create();
+  // }
 
   async executeSeed() {
     const { data } = await this.axios.get<ProductResponse>(
