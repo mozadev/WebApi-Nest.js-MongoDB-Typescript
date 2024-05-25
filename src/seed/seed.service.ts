@@ -21,6 +21,7 @@ export class SeedService {
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly prodModel: Model<Pokemon>,
 
+    // injection of axios adapter
     private readonly http: AxiosAdapter,
   ) {}
 
