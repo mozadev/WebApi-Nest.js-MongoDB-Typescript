@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import axios, { AxiosInstance } from 'axios';
 import { ProductResponse } from './interfaces/product-response.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
 import { Model } from 'mongoose';
+import { AxiosAdapter } from 'src/common/adapters/axios.adapter';
 
 @Injectable()
 export class SeedService {
@@ -20,14 +20,16 @@ export class SeedService {
   constructor(
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly prodModel: Model<Pokemon>,
+
+    private readonly http: AxiosAdapter,
   ) {}
 
   async executeSeed() {
     await this.prodModel.deleteMany({}); // delete * from products;
 
-    // const { data } = await this.axios.get<ProductResponse>(
-    //   'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
-    // );
+    const data = await this.http.get<ProductResponse>(
+      'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
+    );
 
     // 2DA FORMA DE HACERLO
     //const insertPromiseArray: Promise<any>[] = [];
