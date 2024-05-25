@@ -25,10 +25,13 @@ export class SeedService {
     await this.prodModel.deleteMany({}); // delete * from products;
 
     const { data } = await this.axios.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=2&offset=0',
+      'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
     );
+    // 2DA FORMA DE HACERLO
+    //const insertPromiseArray: Promise<any>[] = [];
 
-    const insertPromiseArray: Promise<any>[] = [];
+    // 3ERA FORMA DE HACERLO
+    const productToInsert: { name: string; no: number }[] = [];
 
     data.results.forEach(({ name, url }) => {
       // console.log({ name, url });
@@ -36,12 +39,22 @@ export class SeedService {
       const segments = url.split('/');
       const no = +segments[segments.length - 2];
       // console.log({ name, no });
+      // 2DA FORMA DE HACERLO
       // const product = await this.prodModel.create({ name, no });
-      insertPromiseArray.push(this.prodModel.create({ name, no }));
+      // insertPromiseArray.push(this.prodModel.create({ name, no }));
+      // 3ERA FORMA DE HACERLO
+      productToInsert.push({ name, no }); // [{name: bulbasaur, no: 1}, {name: ivysaur, no: 2}]
     });
     // use foreach to iterate over the data.results array and obtend the name and url of each element. it be usefull to insert database
 
-    await Promise.all(insertPromiseArray);
+    // await Promise.all(insertPromiseArray);
+
+    await this.prodModel.insertMany(productToInsert); // [{name: bulbasaur, no: 1}, {name: ivysaur, no: 2}]
+    // insert into pokemons (name, no)
+    //  (name: 'bulbasaur',no:  1)
+    //  (name: 'pikachu',no:  2)
+    //  (name: 'bulbasaur',no:  1)
+    //  (name: 'bulbasaur',no:  1)
 
     return data.results;
     // console.log(fetch);
