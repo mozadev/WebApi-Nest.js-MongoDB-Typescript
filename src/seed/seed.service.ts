@@ -25,20 +25,23 @@ export class SeedService {
     await this.prodModel.deleteMany({}); // delete * from products;
 
     const { data } = await this.axios.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=5&offset=0',
+      'https://pokeapi.co/api/v2/pokemon?limit=2&offset=0',
     );
 
-    const insertPromisesArray = [];
+    const insertPromiseArray: Promise<any>[] = [];
 
-    data.results.forEach(async ({ name, url }) => {
+    data.results.forEach(({ name, url }) => {
       // console.log({ name, url });
       // console.log(segments);
       const segments = url.split('/');
       const no = +segments[segments.length - 2];
-      console.log({ name, no });
-      const product = await this.prodModel.create({ name, no });
+      // console.log({ name, no });
+      // const product = await this.prodModel.create({ name, no });
+      insertPromiseArray.push(this.prodModel.create({ name, no }));
     });
     // use foreach to iterate over the data.results array and obtend the name and url of each element. it be usefull to insert database
+
+    await Promise.all(insertPromiseArray);
 
     return data.results;
     // console.log(fetch);
