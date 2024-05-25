@@ -9,7 +9,8 @@ import { Model } from 'mongoose';
 export class SeedService {
   //this is dependency de axios en us project
   // axios only can be used once in a project and your value dont change then the asingment inicial is the best way to use it
-  private readonly axios: AxiosInstance = axios;
+
+  // private readonly axios: AxiosInstance = axios;
 
   // constructor() {
   //   // this could be replaced by a provider that allows to use axios throughout th project
@@ -24,9 +25,10 @@ export class SeedService {
   async executeSeed() {
     await this.prodModel.deleteMany({}); // delete * from products;
 
-    const { data } = await this.axios.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
-    );
+    // const { data } = await this.axios.get<ProductResponse>(
+    //   'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
+    // );
+
     // 2DA FORMA DE HACERLO
     //const insertPromiseArray: Promise<any>[] = [];
 
