@@ -15,6 +15,7 @@ import { CreatePokemonDto } from './dto/create-pokemon.dto';
 import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { ParseMongoIdPipe } from 'src/common/pipes/parse-mongo-id/parse-mongo-id.pipe';
 import { query } from 'express';
+import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Controller('pokemon')
 export class PokemonController {
@@ -27,8 +28,8 @@ export class PokemonController {
   }
 
   @Get()
-  findAll(@Query() queryParameters) {
-    console.log({ queryParameters });
+  findAll(@Query() paginationDto: PaginationDto) {
+    console.log({ paginationDto });
     return this.pokemonService.findAll();
   }
 
