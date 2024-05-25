@@ -29,7 +29,7 @@ export class SeedService {
     await this.prodModel.deleteMany({}); // delete * from products;
 
     const data = await this.http.get<ProductResponse>(
-      'https://pokeapi.co/api/v2/pokemon?limit=300&offset=0',
+      'https://pokeapi.co/api/v2/pokemon?limit=650&offset=0',
     );
 
     // 2DA FORMA DE HACERLO
