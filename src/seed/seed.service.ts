@@ -22,9 +22,13 @@ export class SeedService {
   ) {}
 
   async executeSeed() {
+    await this.prodModel.deleteMany({}); // delete * from products;
+
     const { data } = await this.axios.get<ProductResponse>(
       'https://pokeapi.co/api/v2/pokemon?limit=5&offset=0',
     );
+
+    const insertPromisesArray = [];
 
     data.results.forEach(async ({ name, url }) => {
       // console.log({ name, url });
