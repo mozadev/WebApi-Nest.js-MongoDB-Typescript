@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import axios, { AxiosInstance } from 'axios';
 import { HttAdapter } from '../interfaces/http-adapter.interface';
 
+// This adaptaer patron is a nivel of module, so I have export this class to use it in another module
 @Injectable()
 export class AxiosAdapter implements HttAdapter {
   private axios: AxiosInstance = axios;
