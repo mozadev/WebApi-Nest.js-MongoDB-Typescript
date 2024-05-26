@@ -4,13 +4,15 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { CreatePokemonDto } from './dto/create-pokemon.dto';
-import { UpdatePokemonDto } from './dto/update-pokemon.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { ConfigService } from '@nestjs/config';
+
 import { Model, isValidObjectId } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
-import { InjectModel } from '@nestjs/mongoose';
+
+import { CreatePokemonDto } from './dto/create-pokemon.dto';
+import { UpdatePokemonDto } from './dto/update-pokemon.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
-import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
@@ -23,7 +25,9 @@ export class PokemonService {
     //inject directly in the constructor
     private readonly configService: ConfigService,
   ) {
+    // maybe you desire to see defaul limit on console
     console.log(process.env.DEFAULT_LIMIT);
+    console.log(configService.get('default_limit'));
   }
 
   // the insertion to database is asyncronous
