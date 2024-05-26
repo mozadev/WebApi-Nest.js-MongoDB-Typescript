@@ -10,6 +10,7 @@ import { Model, isValidObjectId } from 'mongoose';
 import { Pokemon } from './entities/pokemon.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class PokemonService {
@@ -18,6 +19,9 @@ export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly pokemonModel: Model<Pokemon>,
+
+    //inject directly in the constructor
+    private readonly configService: ConfigService,
   ) {
     console.log(process.env.DEFAULT_LIMIT);
   }
