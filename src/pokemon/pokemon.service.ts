@@ -27,7 +27,7 @@ export class PokemonService {
   ) {
     // maybe you desire to see defaul limit on console
     console.log(process.env.DEFAULT_LIMIT);
-    const defaultLimit = configService.get<number>('default_limit');
+    const defaultLimit = configService.get<number>('defaultLimit');
     console.log({ defaultLimit });
   }
 
@@ -64,7 +64,10 @@ export class PokemonService {
     // console.log(+process.env.DEFAULT_LIMIT);
 
     // const { limit = +process.env.DEFAULT_LIMIT, offset = 0 } = paginationDto;
-    const { limit = 5, offset = 0 } = paginationDto;
+    const {
+      limit = this.configService.get<number>('defaultLimit'),
+      offset = 0,
+    } = paginationDto;
     return this.pokemonModel
       .find()
       .limit(limit)
