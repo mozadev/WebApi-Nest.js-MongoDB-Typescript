@@ -19,7 +19,7 @@ export class PokemonService {
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly pokemonModel: Model<Pokemon>,
   ) {
-    console.log(process.env.PORT);
+    console.log(process.env.DEFAULT_LIMIT);
   }
 
   // the insertion to database is asyncronous
@@ -52,8 +52,10 @@ export class PokemonService {
     }
   }
   findAll(paginationDto: PaginationDto) {
-    console.log(+process.env.DEFAULT_LIMIT);
-    const { limit = +process.env.DEFAULT_LIMIT, offset = 0 } = paginationDto;
+    // console.log(+process.env.DEFAULT_LIMIT);
+
+    // const { limit = +process.env.DEFAULT_LIMIT, offset = 0 } = paginationDto;
+    const { limit = 5, offset = 0 } = paginationDto;
     return this.pokemonModel
       .find()
       .limit(limit)
