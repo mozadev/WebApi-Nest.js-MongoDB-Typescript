@@ -52,6 +52,7 @@ export class PokemonService {
     }
   }
   findAll(paginationDto: PaginationDto) {
+    console.log(+process.env.DEFAULT_LIMIT);
     const { limit = +process.env.DEFAULT_LIMIT, offset = 0 } = paginationDto;
     return this.pokemonModel
       .find()
