@@ -12,6 +12,8 @@ import { SeedModule } from './seed/seed.module';
 // module always goint inside of import array
 @Module({
   imports: [
+    // always It must be on the before MongooseModule.forRoot(process.ev.MONGODB)
+    //  because it is used in the MongooseModule.forRoot to read the env variables
     ConfigModule.forRoot(),
 
     ServeStaticModule.forRoot({

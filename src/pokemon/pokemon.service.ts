@@ -18,7 +18,9 @@ export class PokemonService {
   constructor(
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly pokemonModel: Model<Pokemon>,
-  ) {}
+  ) {
+    console.log(process.env.PORT);
+  }
 
   // the insertion to database is asyncronous
   async create(createPokemonDto: CreatePokemonDto) {
