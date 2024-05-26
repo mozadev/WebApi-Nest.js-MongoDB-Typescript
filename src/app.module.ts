@@ -7,6 +7,7 @@ import { PokemonModule } from './pokemon/pokemon.module';
 import { Mongoose } from 'mongoose';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
+import { EnvConfiguration } from './config/app.config';
 
 // the module decorator is used to define a module
 // module always goint inside of import array
@@ -14,7 +15,9 @@ import { SeedModule } from './seed/seed.module';
   imports: [
     // always It must be on the before MongooseModule.forRoot(process.ev.MONGODB)
     //  because it is used in the MongooseModule.forRoot to read the env variables
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      load: [EnvConfiguration],
+    }),
 
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
