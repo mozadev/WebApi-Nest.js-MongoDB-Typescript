@@ -16,8 +16,9 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 
 @Injectable()
 export class PokemonService {
-  // the injection depedency always is in the constructor
+  private defaultLimit: number;
 
+  // the injection depedency always is in the constructor
   constructor(
     @InjectModel(Pokemon.name) // this injectModel was made by nest team to inject model in this service
     private readonly pokemonModel: Model<Pokemon>,
@@ -26,9 +27,8 @@ export class PokemonService {
     private readonly configService: ConfigService,
   ) {
     // maybe you desire to see defaul limit on console
-    console.log(process.env.DEFAULT_LIMIT);
-    const defaultLimit = configService.get<number>('defaultLimit');
-    console.log({ defaultLimit });
+    // console.log(process.env.DEFAULT_LIMIT);
+    this.defaultLimit = configService.get<number>('defaultLimit');
   }
 
   // the insertion to database is asyncronous
@@ -64,10 +64,7 @@ export class PokemonService {
     // console.log(+process.env.DEFAULT_LIMIT);
 
     // const { limit = +process.env.DEFAULT_LIMIT, offset = 0 } = paginationDto;
-    const {
-      limit = this.configService.get<number>('defaultLimit'),
-      offset = 0,
-    } = paginationDto;
+    const { limit = this.defaultLimit, offset = 0 } = paginationDto;
     return this.pokemonModel
       .find()
       .limit(limit)
