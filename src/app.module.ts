@@ -18,7 +18,7 @@ import { SeedModule } from './seed/seed.module';
       rootPath: join(__dirname, '..', 'public'),
     }),
     //the container docker would be running on port 27017 to this works
-    MongooseModule.forRoot('mongodb://localhost:27017/nest-pokemon'),
+    // MongooseModule.forRoot('mongodb://localhost:27017/nest-pokemon'),
     MongooseModule.forRoot(process.env.MONGODB),
 
     PokemonModule,
