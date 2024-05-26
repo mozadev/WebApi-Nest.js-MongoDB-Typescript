@@ -34,7 +34,7 @@ import { EnvConfiguration } from './config/app.config';
   ],
 })
 export class AppModule {
-  constructor() {
-    console.log(process.env);
-  }
+  // constructor() {
+  //   console.log(process.env);
+  // }
 }
