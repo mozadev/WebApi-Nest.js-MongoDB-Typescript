@@ -8,6 +8,7 @@ import { Mongoose } from 'mongoose';
 import { CommonModule } from './common/common.module';
 import { SeedModule } from './seed/seed.module';
 import { EnvConfiguration } from './config/app.config';
+import { JoiValidationSchema } from './config/joi.validation';
 
 // the module decorator is used to define a module
 // module always goint inside of import array
@@ -16,7 +17,8 @@ import { EnvConfiguration } from './config/app.config';
     // always It must be on the before MongooseModule.forRoot(process.ev.MONGODB)
     //  because it is used in the MongooseModule.forRoot to read the env variables
     ConfigModule.forRoot({
-      load: [EnvConfiguration],
+      load: [EnvConfiguration], //this make conversion and mapping of the env variables
+      validationSchema: JoiValidationSchema, // set the validation schema by default too
     }),
 
     ServeStaticModule.forRoot({
