@@ -22,5 +22,6 @@ async function bootstrap() {
   // apply the validation to all the methods in the controller
 
   await app.listen(process.env.PORT);
+  console.log(`App running on port ${process.env.PORT}`);
 }
 bootstrap();
