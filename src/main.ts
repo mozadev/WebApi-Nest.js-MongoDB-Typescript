@@ -21,6 +21,6 @@ async function bootstrap() {
   // of the request and the parameters of the request,
   // apply the validation to all the methods in the controller
 
-  await app.listen(3000);
+  await app.listen(process.env.PORT);
 }
 bootstrap();
