@@ -29,6 +29,7 @@ export class PokemonService {
     // maybe you desire to see defaul limit on console
     // console.log(process.env.DEFAULT_LIMIT);
     this.defaultLimit = configService.get<number>('defaultLimit');
+    console.log({ defaultLimit: configService.get<number>('defaultLimit') });
   }
 
   // the insertion to database is asyncronous
