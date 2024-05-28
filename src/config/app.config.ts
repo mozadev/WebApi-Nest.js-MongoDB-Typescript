@@ -6,6 +6,7 @@ export const EnvConfiguration = () => ({
   defaultLimit: +process.env.DEFAULT_LIMIT || 7,
 });
 
+// The environment value is stored as a string, so we need to convert it to number
 // const enfv = () => {
 //     return {
 
