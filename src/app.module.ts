@@ -18,7 +18,7 @@ import { JoiValidationSchema } from './config/joi.validation';
     //  because it is used in the MongooseModule.forRoot to read the env variables
     ConfigModule.forRoot({
       load: [EnvConfiguration], //this make conversion and mapping of the env variables
-      validationSchema: JoiValidationSchema, // set the validation schema by default too
+      validationSchema: JoiValidationSchema, // set the validation schema by default too. WORK IN SET WITH LOAD
     }),
 
     ServeStaticModule.forRoot({
