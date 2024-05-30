@@ -26,14 +26,16 @@ docker-compose up -d
 
 ```
 yan start:dev
-
 ```
 
-6. Rebuild the database with the seed
+6. Clonar el archivo `.env.temple` y renombrar la copia a **.env**
+
+7. Fill envairoment varialbes defined in the `.env`
+
+8. Rebuild the database with the seed
 
 ```
 localhost:3000/api/v2/seed
-
 ```
 
 ## Stack usado

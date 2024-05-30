@@ -10,3 +10,4 @@ services:
       MONGODB_DATABASE: nest-pokemon
     volumes:
       - ./mongo:/data/db
+  #link the filesystem with the filesystem of container
