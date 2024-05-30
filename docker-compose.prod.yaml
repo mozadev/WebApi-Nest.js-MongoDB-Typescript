@@ -27,6 +27,6 @@ services:
     ports:
       - 27017:27017
     environment:
-      MONGODB_DATABASE: nest-app
+      MONGODB_DATABASE: nest-pokemon
     volumes:
       - ./mongo:/data/db
