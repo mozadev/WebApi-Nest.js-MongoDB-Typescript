@@ -52,3 +52,24 @@ localhost:3000/api/v2/seed
 ```
 docker-compose -f docker-compose.prod.yaml --env-file .env.prod up --build
 ```
+
+# Production Run
+
+```
+docker-compose -f docker-compose.prod.yaml --env-file .env.prod up
+```
+
+# Notas
+
+Por defecto, docker-compose usa el archivo `.env`, por lo que si tienen el archivo .env y lo configuran con sus variables de entorno de producción, bastaría con
+
+```
+docker-compose -f docker-compose.prod.yaml up --build
+```
+
+Heroku redeploy without changes
+
+```
+git commit --allow-empty -m "Trigger Heroku deploy"
+git push heroku <master|main>
+```
