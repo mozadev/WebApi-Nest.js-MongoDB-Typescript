@@ -22,11 +22,11 @@ services:
 
   db:
     image: mongo:5
-    container_name: mongo-poke
+    container_name: mongo-app
     restart: always
     ports:
       - 27017:27017
     environment:
-      MONGODB_DATABASE: nest-pokemon
+      MONGODB_DATABASE: nest-app
     # volumes:
     #   - ./mongo:/data/db
